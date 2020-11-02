@@ -9,7 +9,6 @@ import HarrisBenedictCard from './HarrisBenedictCard';
 import BMICard from './BMICard';
 import IDWCard from './IDWCard';
 import KCalCard from './KCalCard';
-import ProteinCard from './ProteinCard';
 
 
 import {makeStyles} from '@material-ui/styles';
@@ -40,7 +39,7 @@ function App() {
     const {convertedUnit, convertedValue} = convertUnits(prop, parseFloat(value));
 
     // debugging conversion
-    console.log(`Converted ${value} ${prop} to ${convertedValue} ${convertedUnit}`);
+    //console.log(`Converted ${value} ${prop} to ${convertedValue} ${convertedUnit}`);
 
     setPatient(prevPatient => {
       if (convertedUnit !== undefined) {
@@ -67,7 +66,6 @@ function App() {
         <BMICard pt={patient} />
         <IDWCard pt={patient} />
         <KCalCard pt={patient} />
-        <ProteinCard pt={patient} />
       </div>
       <div>
         <NutritionTable pt={patient} />
