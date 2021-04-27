@@ -1,15 +1,10 @@
 import React from 'react';
-import {useSelector, useDispatch} from 'react-redux'
-import allActions from '../actions'
-
-import {convertUnits} from '../Nutrition';
 
 import PatientForm from './PatientForm'
 import MifflinCard from './MifflinCard';
 import HarrisBenedictCard from './HarrisBenedictCard';
 import KCalCard from './KCalCard';
 import TitleBar from './TitleBar';
-import ConditionSelect from './ConditionSelect';
 
 
 import {makeStyles} from '@material-ui/styles';
@@ -32,7 +27,7 @@ function App() {
   })
 
   const classes = useStyles();
-  
+
   return (
     <div className={classes.root}>
       <div className={classes.titleBar}>
