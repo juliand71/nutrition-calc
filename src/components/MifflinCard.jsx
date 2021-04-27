@@ -7,7 +7,9 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import {makeStyles} from '@material-ui/styles';
 
-function MifflinCard(props) {
+import {useSelector, useDispatch} from 'react-redux';
+
+function MifflinCard() {
   const useStyles = makeStyles({
     root: {
       width: '400px',
@@ -26,8 +28,8 @@ function MifflinCard(props) {
   });
 
   const classes = useStyles();
-
-  const {age, weightKG, heightCM, gender, pal} = props.pt;
+  const currentPatient = useSelector(state => state.currentPatient);
+  const {age, weightKG, heightCM, gender, pal} = currentPatient
 
   function equationString() {
     if (gender === "male") {
@@ -45,13 +47,13 @@ function MifflinCard(props) {
           {equationString()} =
         </Typography>
         <Typography className={classes.result}>
-          {Nutrition.calculateMifflin(props.pt)}
+          {Nutrition.calculateMifflin(currentPatient)}
         </Typography>
         <Typography>
           x PAL = 
         </Typography>
         <Typography className={classes.result}>
-          {(Nutrition.calculateMifflin(props.pt) * pal)}
+          {(Nutrition.calculateMifflin(currentPatient) * pal)}
         </Typography>
       </CardContent>
     </Card>

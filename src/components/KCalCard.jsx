@@ -5,11 +5,10 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
-import TextField from '@material-ui/core/TextField';
+import { useSelector } from 'react-redux';
 
 
-
-function KCalCard(props) {
+function KCalCard() {
   const useStyles = makeStyles({
     root: {
       width: '400px',
@@ -33,6 +32,7 @@ function KCalCard(props) {
 
   const classes = useStyles();
 
+  const currentPatient = useSelector(state => state.currentPatient);
   const [kcalkg, setKcalkg] = React.useState([20, 30]);
   const [protein, setProtein] = React.useState([1.0, 2.0]);
 
@@ -62,10 +62,10 @@ function KCalCard(props) {
           onChange={handleKcalChange}
         />
         <Typography className={classes.equation}>
-          {`${kcalkg[0]} kcal/kg`} = <span className={classes.result}>{kcalkg[0] * props.pt.weightKG}</span>
+          {`${kcalkg[0]} kcal/kg`} = <span className={classes.result}>{kcalkg[0] * currentPatient.weightKG}</span>
         </Typography>
         <Typography className={classes.equation}>
-          {`${kcalkg[1]} kcal/kg`} = <span className={classes.result}>{kcalkg[1] * props.pt.weightKG}</span>
+          {`${kcalkg[1]} kcal/kg`} = <span className={classes.result}>{kcalkg[1] * currentPatient.weightKG}</span>
         </Typography>
 
         <Typography variant="h6" className={classes.cardTitle}>protein g / kg</Typography>
@@ -83,10 +83,10 @@ function KCalCard(props) {
           onChange={handleProteinChange}
         />
         <Typography className={classes.equation}>
-          {`${protein[0]} g/kg`} = <span className={classes.result}>{protein[0] * props.pt.weightKG}</span>
+          {`${protein[0]} g/kg`} = <span className={classes.result}>{protein[0] * currentPatient.weightKG}</span>
         </Typography>
         <Typography className={classes.equation}>
-          {`${protein[1]} g/kg`} = <span className={classes.result}>{protein[1] * props.pt.weightKG}</span>
+          {`${protein[1]} g/kg`} = <span className={classes.result}>{protein[1] * currentPatient.weightKG}</span>
         </Typography>
       </CardContent>
     </Card>

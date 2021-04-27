@@ -7,7 +7,9 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core';
 
-function HarrisBenedictCard(props) {
+import {useSelector} from 'react-redux';
+
+function HarrisBenedictCard() {
   const useStyles = makeStyles({
     root: {
       width: '400px',
@@ -26,8 +28,8 @@ function HarrisBenedictCard(props) {
   });
 
   const classes = useStyles();
-
-  const {age, weightKG, heightCM, gender, pal} = props.pt;
+  const currentPatient = useSelector(state => state.currentPatient);
+  const {age, weightKG, heightCM, gender, pal} = currentPatient;
 
   function equationString() {
     if (gender === "male") {
@@ -45,13 +47,13 @@ function HarrisBenedictCard(props) {
           {equationString()} =
         </Typography>
         <Typography className={classes.result}>
-          {Nutrition.calculateHB(props.pt)}
+          {Nutrition.calculateHB(currentPatient)}
         </Typography>
         <Typography>
           x PAL = 
         </Typography>
         <Typography className={classes.result}>
-          {(Nutrition.calculateHB(props.pt) * pal)}
+          {(Nutrition.calculateHB(currentPatient) * pal)}
         </Typography>
       </CardContent>
     </Card>

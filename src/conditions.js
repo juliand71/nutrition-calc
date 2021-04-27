@@ -52,19 +52,19 @@ const conditions = [
     name: 'Critical Care - VENT - NONOBESE',
     calDesc: 'Penn State 2003b',
     protDesc: '1.2 - 2.0 g / kg actual weight',
-    remarks: '???permissive underfeeding for tube feeding???',
+    remarks: 'permissive underfeeding for tube feeding',
   },
   {
     name: 'Critical Care - VENT - OBESE',
     calDesc: 'Penn State 2003b if less than 60 years old, if older than 60 Penn State 2010',
     protDesc: '2.0+ g / kg if BMI is 30-40, 2.5+ g / kg if BMI > 40',
-    remarks: '???permissive underfeeding for tube feeding???',
+    remarks: 'permissive underfeeding for tube feeding',
   },
   {
     name: 'Critical Care - NONVENT',
     calDesc: 'Mifflin x 1.25',
     protDesc: '1.2 - 2.0 g / kg',
-    remarks: '???permissive underfeeding for tube feeding???',
+    remarks: 'permissive underfeeding for tube feeding',
   },
 
   {

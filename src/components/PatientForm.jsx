@@ -1,4 +1,5 @@
 import React from 'react';
+import {useSelector, useDispatch} from 'react-redux'
 
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -13,10 +14,12 @@ import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
 
 import pals from '../pals';
+import allActions from '../actions';
+import ConditionSelect from './ConditionSelect';
 
-const drawerWidth = 250;
+const drawerWidth = 330;
 
-function PatientForm(props) {
+function PatientForm() {
   const useStyles = makeStyles(() => ({
     drawer: {
       width: drawerWidth,
@@ -24,7 +27,7 @@ function PatientForm(props) {
     },
     drawerPaper: {
       width: drawerWidth,
-      margin: '10px',
+      margin: ' 75px 10px',
     },
     inputGroup: {
       marginBottom: '20px',
@@ -36,26 +39,24 @@ function PatientForm(props) {
     },
     ageInput: {
       margin: '0.25%',
+      width: '90%'
+    },
+    palLabel: {
+      marginBottom: '30px'
     },
     palInput: {
       width: '80%',
-      marginLeft: '10px'
+      marginLeft: '8%'
     },
-
   }));
 
   const classes = useStyles();
 
-  function handleChange(event) {
-    const {name, value} = event.target;
-    props.onUpdate(name, value);
-  }
-
-  function handleSliderChange(event, newValue) {
-    props.onUpdate("pal", newValue);
-  }
+  const currentPatient = useSelector(state => state.currentPatient);
+  const dispatch = useDispatch();
 
   return (
+
     <Drawer
       variant="permanent"
       anchor="left"
@@ -66,7 +67,7 @@ function PatientForm(props) {
     >
       <FormControl component="fieldset">
         <FormLabel component="legend">Gender</FormLabel>
-        <RadioGroup aria-label="gender" name="gender" value={props.pt.gender} onChange={handleChange}>
+        <RadioGroup aria-label="gender" name="gender" value={currentPatient.gender} onChange={ (event) => dispatch(allActions.patientActions.setGender(event.currentTarget.value))}>
           <FormControlLabel value="female" control={<Radio />} label="Female" />
           <FormControlLabel value="male" control={<Radio />} label="Male" />
         </RadioGroup>
@@ -83,8 +84,8 @@ function PatientForm(props) {
             shrink: true,
           }}
           variant="outlined"
-          value={props.pt.age}
-          onChange={handleChange}   
+          value={currentPatient.age}
+          onChange={(event) => dispatch(allActions.patientActions.setAge(event.currentTarget.value))}   
           className={classes.ageInput}      
         />
       </div>
@@ -99,8 +100,8 @@ function PatientForm(props) {
             shrink: true,
           }}
           variant="outlined"
-          value={props.pt.heightCM}
-          onChange={handleChange}
+          value={currentPatient.heightCM}
+          onChange={(event) => dispatch(allActions.patientActions.setHeightCM(event.currentTarget.value))}  
           className={classes.conversionInput}
         />
         <TextField
@@ -112,8 +113,8 @@ function PatientForm(props) {
             shrink: true,
           }}
           variant="outlined"
-          value={props.pt.heightIN}
-          onChange={handleChange}
+          value={currentPatient.heightIN}
+          onChange={(event) => dispatch(allActions.patientActions.setHeightIN(event.currentTarget.value))}  
           className={classes.conversionInput}
         />
       </div>
@@ -128,8 +129,8 @@ function PatientForm(props) {
             shrink: true,
           }}
           variant="outlined"
-          value={props.pt.weightKG}
-          onChange={handleChange}
+          value={currentPatient.weightKG}
+          onChange={(event) => dispatch(allActions.patientActions.setWeightKG(event.currentTarget.value))}  
           className={classes.conversionInput}
         />
         <TextField
@@ -141,33 +142,32 @@ function PatientForm(props) {
             shrink: true,
           }}
           variant="outlined"
-          value={props.pt.weightLB}
-          onChange={handleChange}
+          value={currentPatient.weightLB}
+          onChange={(event) => dispatch(allActions.patientActions.setWeightLB(event.currentTarget.value))}  
           className={classes.conversionInput}
         />
       </div>
 
-      <div className={classes.palInput}>
-        <Typography id="discrete-slider-always" gutterBottom>
+      <div className={classes.inputGroup}>
+        <Typography id="discrete-slider-always" gutterBottom className={classes.palLabel}>
           PAL
         </Typography>
         <Slider
-          min={1.2}
+          min={1.0}
           max={2.7}
           defaultValue={1.2}
-          value={props.pt.pal}
+          value={currentPatient.pal}
           aria-labelledby="discrete-slider-always"
           step={0.1}
           marks={pals}
           valueLabelDisplay="on"
           name="pal"
-          onChange={handleSliderChange}
+          onChange={(event, newValue) => dispatch(allActions.patientActions.setPAL(newValue))} 
+          className={classes.palInput}
         />
       </div>
-
-
+      <ConditionSelect />
     </Drawer>
-
   );
 }
 

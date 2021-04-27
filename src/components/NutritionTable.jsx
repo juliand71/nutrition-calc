@@ -10,18 +10,19 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
-import conditions from '../conditions'
+import {useSelector, useDispatch} from 'react-redux';
 
 function NutritionTable(props) {
 
   const useStyles = makeStyles({
     root: {
+      marginTop: "400",
       marginLeft: "400"
     },
   });
 
   const classes = useStyles();
-
+  const currentConditions = useSelector(state => state.currentConditions);
   return (
     <TableContainer className={classes.root} component={Paper}>
       <Table >
@@ -34,7 +35,7 @@ function NutritionTable(props) {
           </TableRow>
         </TableHead>
         <TableBody>
-            {conditions.map((cond, i) => {
+            {currentConditions.map((cond, i) => {
               return (
                 <TableRow key={i}>
                   <TableCell align="right">{cond.name}</TableCell>
