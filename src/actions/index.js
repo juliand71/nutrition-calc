@@ -1,9 +1,11 @@
 import patientActions from "./patientActions";
 import conditionActions from './conditionActions';
+import amputationActions from './amputationActions';
 
 const allActions = {
   patientActions,
-  conditionActions
+  conditionActions,
+  amputationActions
 };
 
 export default allActions;

@@ -33,6 +33,30 @@ function calculateHB(patient) {
   }
 }
 
+function AmputatedPercentage(amputations) {
+  var amputationP = 0;
+  if (amputations.rightFoot) {
+    amputationP += 0.015;
+    if (amputations.rightCalf) {
+      amputationP += 0.044;
+      if (amputations.rightLeg) {
+        amputationP += 0.0101;
+      }
+    }
+  }
+  if (amputations.leftFoot) {
+    amputationP += 0.015;
+    if (amputations.leftCalf) {
+      amputationP += 0.044;
+      if (amputations.leftLeg) {
+        amputationP += 0.0101;
+      }
+    }
+  }
+
+  return amputationP;
+}
+
 /*
 *
 */
@@ -42,7 +66,15 @@ function calculateBMI(patient, amputations) {
     weightKG
   } = patient;
   const meters = heightCM / 100;
-
+  console.log(amputations)
+  const ampct = AmputatedPercentage(amputations);
+  if (ampct > 0.0){
+    // patient has amputations to consider
+    // estimated body weight = observed body weight(after amputations) divided by  one minus the percentage amputated squared
+    // user will have to enter the height, since that is potentially affected by amputation
+    const wte = weightKG / (1 - ampct);
+    return roundTwoDecimal(wte / (meters * meters));
+  }
   return roundTwoDecimal(weightKG / (meters * meters));
 }
 
@@ -57,19 +89,38 @@ function calculateIDW(patient, amputations) {
 
   // use math.round to ensure we get a whole number
   const overSixty = Math.round(heightIN) - 60;
-
+  const ampct = AmputatedPercentage(amputations);
+  var idw;
   if (overSixty <= 0) {
     if (gender === 'male') {
-      return 106;
+      idw = 106;
     } else {
-      return 100;
+      idw = 100;
     }
+
+    if (ampct > 0.0){
+      // patient has amputations to consider
+      // ideal weight is reduced by percentage calculated above
+      return idw - (idw * ampct)
+    }
+    return idw;
   }
+
+  
   if (gender === 'male') {
-    return (106 + (6 * overSixty));
+    idw = (106 + (6 * overSixty));
   } else {
-    return (100 + (5 * overSixty));
+    idw =  (100 + (5 * overSixty));
   }
+  if (ampct > 0.0){
+    // patient has amputations to consider
+    // ideal weight is reduced by percentage calculated above
+    return idw - (idw * ampct);
+
+  }
+  return idw;
+
+
 }
 
 /*
@@ -113,6 +164,7 @@ function roundTwoDecimal(value) {
 */
 const Nutrition = {
   calculateMifflin: calculateMifflin,
+  AmputatedPercentage: AmputatedPercentage,
   calculateBMI: calculateBMI,
   calculateHB: calculateHB,
   calculateIDW: calculateIDW,
@@ -125,6 +177,7 @@ const Nutrition = {
 */
 export default Nutrition;
 export {
+  AmputatedPercentage,
   calculateIDW,
   calculateMifflin,
   calculateBMI,

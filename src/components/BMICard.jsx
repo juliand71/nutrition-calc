@@ -30,39 +30,61 @@ function BMICard(props) {
   const classes = useStyles();
 
   const currentPatient = useSelector(state => state.currentPatient);
+  const currentAmputations = useSelector(state => state.currentAmputations);
+
   const {weightKG, heightCM} = currentPatient;
   const {gender} = currentPatient;
 
   function BMIequationString() {
     const heightM = heightCM / 100;
-    return `${weightKG} kg / ${heightM}^2`;
+    const ampct = Nutrition.AmputatedPercentage(currentAmputations);
+    if (ampct > 0.0) {
+      const estWeightKG = Nutrition.roundTwoDecimal(weightKG / (1 - ampct));
+      return`${estWeightKG} kg / ${heightM}^2`;
+    }
+    return`${weightKG} kg / ${heightM}^2`;
+
   }
 
   
   function IBWequationString() {
+    var ibwStr;
     if (gender === 'female') {
-      return `100 lbs for 5 feet + 5 lbs per inch`;
+      ibwStr = `100 lbs for 5 feet + 5 lbs per inch`;
+
     } else if (gender ==='male') {
-      return `106 lbs for 5 feet + 6 lbs per inch`;
+      ibwStr = `106 lbs for 5 feet + 6 lbs per inch`;
+
     }
+
+    const ampct = Nutrition.AmputatedPercentage(currentAmputations);
+    if (ampct > 0.0) {
+      const reduceBy = ampct * 100;
+      ibwStr = ibwStr.concat(` - ${reduceBy}% amputated`)
+    }
+
+    return ibwStr;
   }
+
+
 
   return (
     <Card className={classes.root}>
       <CardContent>
         <Typography variant="h6" className={classes.cardTitle}>BMI</Typography>
+
         <Typography className={classes.equation}>
           {BMIequationString()} =
         </Typography>
         <Typography className={classes.result}>
-          {Nutrition.calculateBMI(currentPatient)}
+          {Nutrition.calculateBMI(currentPatient, currentAmputations)}
         </Typography>
         <Typography variant="h6" className={classes.cardTitle}>IBW</Typography>
         <Typography className={classes.equation}>
           {IBWequationString()} =
         </Typography>
         <Typography className={classes.result}>
-          {Nutrition.calculateIDW(currentPatient)}
+          {Nutrition.calculateIDW(currentPatient, currentAmputations)}
         </Typography>
       </CardContent>
     </Card>

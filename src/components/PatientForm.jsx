@@ -16,6 +16,7 @@ import Slider from '@material-ui/core/Slider';
 import pals from '../pals';
 import allActions from '../actions';
 import ConditionSelect from './ConditionSelect';
+import AmputationSelect from './AmputationSelect';
 
 const drawerWidth = 330;
 
@@ -167,6 +168,7 @@ function PatientForm() {
         />
       </div>
       <ConditionSelect />
+      <AmputationSelect />
     </Drawer>
   );
 }
