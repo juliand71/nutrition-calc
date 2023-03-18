@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.js": "/nutrition-calc/static/js/main.138fff9b.chunk.js",
+    "main.js.map": "/nutrition-calc/static/js/main.138fff9b.chunk.js.map",
+    "runtime-main.js": "/nutrition-calc/static/js/runtime-main.172f3921.js",
+    "runtime-main.js.map": "/nutrition-calc/static/js/runtime-main.172f3921.js.map",
+    "static/js/2.a318df18.chunk.js": "/nutrition-calc/static/js/2.a318df18.chunk.js",
+    "static/js/2.a318df18.chunk.js.map": "/nutrition-calc/static/js/2.a318df18.chunk.js.map",
+    "index.html": "/nutrition-calc/index.html",
+    "precache-manifest.eb5b4b72637e10b62b58d2a70f4022f6.js": "/nutrition-calc/precache-manifest.eb5b4b72637e10b62b58d2a70f4022f6.js",
+    "service-worker.js": "/nutrition-calc/service-worker.js",
+    "static/js/2.a318df18.chunk.js.LICENSE.txt": "/nutrition-calc/static/js/2.a318df18.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.172f3921.js",
+    "static/js/2.a318df18.chunk.js",
+    "static/js/main.138fff9b.chunk.js"
+  ]
+}
