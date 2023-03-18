@@ -4,4 +4,4 @@ A react web app for making calculating nurtition information easier
 
 Made for my Wife
 
-nutrition-calcs.herokuapp.com
+https://juliand71.github.io/nutrition-calc/
