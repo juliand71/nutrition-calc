@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/nutrition-calc/precache-manifest.052091f35e4bf739de92ad4f04615e5e.js"
+  "/nutrition-calc/precache-manifest.d83abe5ab56fe6ec7012cbfaf4be216c.js"
 );
 
 self.addEventListener('message', (event) => {

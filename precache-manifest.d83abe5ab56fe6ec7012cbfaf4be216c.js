@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "055c1a0753f0601548f7a0a958011f79",
+    "revision": "f349fddba669e251bbac0c090f410662",
     "url": "/nutrition-calc/index.html"
   },
   {
@@ -12,8 +12,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/nutrition-calc/static/js/2.a318df18.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "0ff6f55281f5654dc95c",
-    "url": "/nutrition-calc/static/js/main.b1f37cfe.chunk.js"
+    "revision": "252fef26251e5d341302",
+    "url": "/nutrition-calc/static/js/main.6441ecce.chunk.js"
   },
   {
     "revision": "b5d10c3538e76c945839",
