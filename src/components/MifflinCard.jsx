@@ -30,6 +30,8 @@ function MifflinCard() {
   const classes = useStyles();
   const currentPatient = useSelector(state => state.currentPatient);
   const {age, weightKG, heightCM, gender, pal} = currentPatient
+  const palMin = pal[0];
+  const palMax = pal[1];
 
   function equationString() {
     if (gender === "male") {
@@ -42,7 +44,9 @@ function MifflinCard() {
   return (
     <Card className={classes.root}>
       <CardContent>
-        <Typography variant="h6" className={classes.cardTitle}>Mifflin</Typography>
+        <Typography variant="h6" className={classes.cardTitle}>
+          Mifflin
+        </Typography>
         <Typography className={classes.equation}>
           {equationString()} =
         </Typography>
@@ -50,10 +54,11 @@ function MifflinCard() {
           {Nutrition.calculateMifflin(currentPatient)}
         </Typography>
         <Typography>
-          x PAL = 
+          x PAL ({palMin} - {palMax}) =
         </Typography>
         <Typography className={classes.result}>
-          {(Nutrition.calculateMifflin(currentPatient) * pal)}
+          {Nutrition.calculateMifflin(currentPatient) * palMin} -{' '}
+          {Nutrition.calculateMifflin(currentPatient) * palMax}
         </Typography>
       </CardContent>
     </Card>

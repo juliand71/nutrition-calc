@@ -30,6 +30,8 @@ function HarrisBenedictCard() {
   const classes = useStyles();
   const currentPatient = useSelector(state => state.currentPatient);
   const {age, weightKG, heightCM, gender, pal} = currentPatient;
+  const palMin = pal[0];
+  const palMax = pal[1];
 
   function equationString() {
     if (gender === "male") {
@@ -42,7 +44,9 @@ function HarrisBenedictCard() {
   return (
     <Card className={classes.root}>
       <CardContent>
-        <Typography variant="h6" className={classes.cardTitle}>Harris Benedict</Typography>
+        <Typography variant="h6" className={classes.cardTitle}>
+          Harris Benedict
+        </Typography>
         <Typography className={classes.equation}>
           {equationString()} =
         </Typography>
@@ -50,10 +54,11 @@ function HarrisBenedictCard() {
           {Nutrition.calculateHB(currentPatient)}
         </Typography>
         <Typography>
-          x PAL = 
+          x PAL ({palMin} - {palMax}) =
         </Typography>
         <Typography className={classes.result}>
-          {(Nutrition.calculateHB(currentPatient) * pal)}
+          {Nutrition.calculateMifflin(currentPatient) * palMin} -{' '}
+          {Nutrition.calculateMifflin(currentPatient) * palMax}
         </Typography>
       </CardContent>
     </Card>
