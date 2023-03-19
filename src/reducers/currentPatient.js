@@ -8,7 +8,7 @@ const currentPatient = (state={
   weightLB: 100,
   heightCM: 152.4,
   heightIN: 60,
-  pal: [1.25, 2.0],
+  pal: [1.2, 2.0],
 }, action) => {
   switch (action.type) {
     case "SET_AGE":

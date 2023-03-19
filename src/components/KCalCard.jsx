@@ -76,7 +76,7 @@ function KCalCard() {
           defaultValue={0.8}
           value={protein}
           aria-labelledby="discrete-slider-always"
-          step={0.1}
+          step={0.05}
           marks={[{value: 1.0, label: '1.0'}, {value: 2.0, label: '2.0'}, {value: 3.0, label: '3.0'}]}
           valueLabelDisplay="on"
           name="protein"

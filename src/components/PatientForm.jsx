@@ -154,12 +154,12 @@ function PatientForm() {
           PAL
         </Typography>
         <Slider
-          min={1.0}
+          min={0.7}
           max={3.0}
-          defaultValue={[1.25, 2.0]}
+          defaultValue={[1.2, 2.0]}
           value={currentPatient.pal}
           aria-labelledby="discrete-slider-always"
-          step={0.05}
+          step={0.1}
           marks={pals}
           valueLabelDisplay="on"
           name="pal"
